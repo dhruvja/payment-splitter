@@ -75,7 +75,7 @@ export default function Dashboard() {
     console.log("This is users", users);
     if (users.length === 0) {
       console.log("Fetching now");
-      const fetchUrl = `${testUrl}/allUsers`;
+      const fetchUrl = `/allUsers`;
       fetch(fetchUrl)
         .then((data) => data.json())
         .then((data) => {
@@ -120,7 +120,7 @@ export default function Dashboard() {
     setAmount(parseInt(value, 10));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     setLoading(true);
     console.log("I am submitting now");
     const userId = 1;

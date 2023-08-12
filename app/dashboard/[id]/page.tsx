@@ -40,7 +40,7 @@ import Navbar from "../../../components/navbar";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { isConstructorDeclaration } from "typescript";
 
-export default function Dashboard(props) {
+export default function Dashboard(props: any) {
   const [present, setPresent] = useState(false);
   const [data, setData] = useState();
   const [open, setOpen] = useState(false);
@@ -120,7 +120,7 @@ export default function Dashboard(props) {
     setAmount(parseInt(value, 10));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     setLoading(true);
     console.log("I am submitting now");
     const {id: payerId} = props.params;
@@ -237,7 +237,7 @@ export default function Dashboard(props) {
 
             <CardBody>
               <Stack divider={<StackDivider />} spacing="4">
-                {data?.lentWithUsers.map((doc, index) => (
+                {data?.lentWithUsers.map((doc: any, index: number) => (
                   <Box key={index}>
                     <Flex>
                       {/* <Stack> */}
