@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  mobile    String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Expense   Expense[]
+  Members   Members[]
+}
+
+model Groups {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  Expense   Expense[]
+  Members   Members[]
+}
+
+model Members {
+  id      Int    @id @default(autoincrement())
+  group   Groups @relation(fields: [groupId], references: [id])
+  groupId Int
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int
+}
+
+model Expense {
+  id        Int      @id @default(autoincrement())
+  payer     User     @relation(fields: [payerId], references: [id])
+  payerId   Int
+  amount    Int
+  createdAt DateTime @default(now())
+  group     Groups?  @relation(fields: [groupId], references: [id])
+  groupId   Int?
+  Owers Owers[]
+}
+
+model Owers {
+  id        Int     @id @default(autoincrement())
+  expense   Expense @relation(fields: [expenseId], references: [id])
+  expenseId Int
+  userId Int
+  amount Int
+  paid Boolean @default(false)
+}
